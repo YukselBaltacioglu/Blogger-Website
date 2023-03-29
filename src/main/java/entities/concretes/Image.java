@@ -18,7 +18,7 @@ public class Image {
 
     @Id
     @Column(name = "image_id")
-    private String id;
+    private int id;
 
     @ManyToMany(mappedBy = "images", fetch = FetchType.LAZY)
     private List<Blog> blog;
@@ -32,6 +32,9 @@ public class Image {
     @Column(name = "img_name")
     private String imgName;
 
-
-
+    public Image(String imgUrl, String imgContent, String imgName) {
+        this.imgUrl = imgUrl;
+        this.imgContent = imgContent;
+        this.imgName = imgName;
+    }
 }

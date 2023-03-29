@@ -18,10 +18,13 @@ public class User {
 
     @Id
     @Column(name = "user_id")
-    private long id;
+    private int id;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Blog> blogs;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Inbox> inboxes;
 
     @Column(name = "name")
     private String name;

@@ -19,7 +19,10 @@ public class Comment {
 
     @Id
     @Column(name = "comment_id")
-    private String id;
+    private int id;
+
+    @Column(name = "popularity")
+    private int popularity;
 
     @ManyToOne
     @JoinColumn(name = "comment_id")
@@ -38,10 +41,25 @@ public class Comment {
     @Column(name = "comment_date")
     private LocalDateTime commentDate;
 
+    @Column(name = "isDeleted")
+    private boolean isDeleted;
+
+    public Comment(int popularity, String name, String email, StringBuilder comment, LocalDateTime commentDate) {
+        this.popularity = popularity;
+        this.name = name;
+        this.email = email;
+        this.comment = comment;
+        this.commentDate = commentDate;
+        this.isDeleted = false;
+
+    }
 
 
 
-
-
-
+    public void upVote() {
+        this.popularity++;
+    }
+    public void deVote() {
+        this.popularity--;
+    }
 }

@@ -1,5 +1,6 @@
 package entities.concretes;
 
+import entities.dtos.BlogDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,11 +22,14 @@ public class Blog {
     @Id
     @Column(name = "blog_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Column(name = "popularity")
+    private int popularity  ;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "categories_of_blog", joinColumns = @JoinColumn(name = "blog_id"),
@@ -55,4 +59,17 @@ public class Blog {
             inverseJoinColumns = @JoinColumn(name = "image_id"))
     private List<Image> images;
 
+    public Blog(User user, int popularity, List<Category> categories, String title, List<Content> contents, LocalDateTime releaseDate, Statistic stats) {
+        this.user = user;
+        this.popularity = popularity;
+        this.categories = categories;
+        this.title = title;
+        this.contents = contents;
+        this.releaseDate = releaseDate;
+        this.stats = stats;
+    }
+
+    public Blog(BlogDto blogDto){
+
+    }
 }

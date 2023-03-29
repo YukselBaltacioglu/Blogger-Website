@@ -1,9 +1,6 @@
 package entities.concretes;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +17,7 @@ public class Inbox {
 
     @Id
     @Column(name = "inbox_id")
-    private String id;
+    private int id;
 
     @Column(name = "name")
     private String name;
@@ -35,4 +32,18 @@ public class Inbox {
     @Column(name = "message")
     private StringBuilder message;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @Column(name = "isRead")
+    private boolean isRead;
+
+    public Inbox(String name, String email, String content, StringBuilder message) {
+        this.name = name;
+        this.email = email;
+        this.content = content;
+        this.message = message;
+        this.isRead = false;
+    }
 }
